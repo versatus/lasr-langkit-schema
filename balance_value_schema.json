@@ -33,7 +33,8 @@
       "items": {
         "type": "integer",
         "format": "uint64",
-        "minimum": 0.0
+        "minimum": 0.0,
+        "maximum": 18446744073709551615.0
       },
       "maxItems": 4,
       "minItems": 4
