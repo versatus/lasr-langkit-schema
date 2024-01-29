@@ -1,0 +1,507 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenFieldValue",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "Balance"
+      ],
+      "properties": {
+        "Balance": {
+          "$ref": "#/definitions/BalanceValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Metadata"
+      ],
+      "properties": {
+        "Metadata": {
+          "$ref": "#/definitions/MetadataValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "TokenIds"
+      ],
+      "properties": {
+        "TokenIds": {
+          "$ref": "#/definitions/TokenIdValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Allowance"
+      ],
+      "properties": {
+        "Allowance": {
+          "$ref": "#/definitions/AllowanceValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Approvals"
+      ],
+      "properties": {
+        "Approvals": {
+          "$ref": "#/definitions/ApprovalsValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Data"
+      ],
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DataValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Status"
+      ],
+      "properties": {
+        "Status": {
+          "$ref": "#/definitions/StatusValue"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "Address": {
+      "description": "Represents a 20-byte Ethereum Compatible address.\n\nThis structure is used to store Ethereum Compatible addresses, which are derived from the public key. It implements traits like Clone, Copy, Debug, Serialize, Deserialize, etc., for ease of use across various contexts.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint8",
+        "minimum": 0.0
+      },
+      "maxItems": 20,
+      "minItems": 20
+    },
+    "AllowanceValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Address"
+                },
+                {
+                  "$ref": "#/definitions/U256"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "$ref": "#/definitions/Address"
+                  },
+                  {
+                    "$ref": "#/definitions/U256"
+                  }
+                ],
+                "maxItems": 2,
+                "minItems": 2
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Address"
+                },
+                {
+                  "$ref": "#/definitions/U256"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Revoke"
+          ],
+          "properties": {
+            "Revoke": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ApprovalsValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Address"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/U256"
+                  }
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "$ref": "#/definitions/Address"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/U256"
+                    }
+                  }
+                ],
+                "maxItems": 2,
+                "minItems": 2
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Address"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/U256"
+                  }
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Revoke"
+          ],
+          "properties": {
+            "Revoke": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "BalanceValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Credit"
+          ],
+          "properties": {
+            "Credit": {
+              "$ref": "#/definitions/U256"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Debit"
+          ],
+          "properties": {
+            "Debit": {
+              "$ref": "#/definitions/U256"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DataValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MetadataValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StatusValue": {
+      "type": "string",
+      "enum": [
+        "Reverse",
+        "Lock",
+        "Unlock"
+      ]
+    },
+    "TokenIdValue": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "Pop"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "Push"
+          ],
+          "properties": {
+            "Push": {
+              "$ref": "#/definitions/U256"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/U256"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer",
+                  "format": "uint",
+                  "minimum": 0.0
+                },
+                {
+                  "$ref": "#/definitions/U256"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "$ref": "#/definitions/U256"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "U256": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0.0
+      },
+      "maxItems": 4,
+      "minItems": 4
+    }
+  }
+}

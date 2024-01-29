@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenField",
+  "type": "string",
+  "enum": [
+    "ProgramId",
+    "OwnerId",
+    "Balance",
+    "Metadata",
+    "TokenIds",
+    "Allowance",
+    "Approvals",
+    "Data",
+    "Status"
+  ]
+}

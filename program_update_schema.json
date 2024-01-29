@@ -1,0 +1,282 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProgramUpdate",
+  "type": "object",
+  "required": [
+    "account",
+    "updates"
+  ],
+  "properties": {
+    "account": {
+      "$ref": "#/definitions/AddressOrNamespace"
+    },
+    "updates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProgramUpdateField"
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "description": "Represents a 20-byte Ethereum Compatible address.\n\nThis structure is used to store Ethereum Compatible addresses, which are derived from the public key. It implements traits like Clone, Copy, Debug, Serialize, Deserialize, etc., for ease of use across various contexts.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint8",
+        "minimum": 0.0
+      },
+      "maxItems": 20,
+      "minItems": 20
+    },
+    "AddressOrNamespace": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "This"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "Address"
+          ],
+          "properties": {
+            "Address": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Namespace"
+          ],
+          "properties": {
+            "Namespace": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DataValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "LinkedProgramsValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MetadataValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Insert"
+          ],
+          "properties": {
+            "Insert": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "maxItems": 2,
+              "minItems": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Extend"
+          ],
+          "properties": {
+            "Extend": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Remove"
+          ],
+          "properties": {
+            "Remove": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Namespace": {
+      "type": "string"
+    },
+    "ProgramField": {
+      "type": "string",
+      "enum": [
+        "LinkedPrograms",
+        "Metadata",
+        "Data"
+      ]
+    },
+    "ProgramFieldValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "LinkedPrograms"
+          ],
+          "properties": {
+            "LinkedPrograms": {
+              "$ref": "#/definitions/LinkedProgramsValue"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Metadata"
+          ],
+          "properties": {
+            "Metadata": {
+              "$ref": "#/definitions/MetadataValue"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Data"
+          ],
+          "properties": {
+            "Data": {
+              "$ref": "#/definitions/DataValue"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ProgramUpdateField": {
+      "type": "object",
+      "required": [
+        "field",
+        "value"
+      ],
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/ProgramField"
+        },
+        "value": {
+          "$ref": "#/definitions/ProgramFieldValue"
+        }
+      }
+    }
+  }
+}

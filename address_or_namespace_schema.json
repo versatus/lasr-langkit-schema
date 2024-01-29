@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AddressOrNamespace",
+  "oneOf": [
+    {
+      "type": "string",
+      "enum": [
+        "This"
+      ]
+    },
+    {
+      "type": "object",
+      "required": [
+        "Address"
+      ],
+      "properties": {
+        "Address": {
+          "$ref": "#/definitions/Address"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Namespace"
+      ],
+      "properties": {
+        "Namespace": {
+          "$ref": "#/definitions/Namespace"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "Address": {
+      "description": "Represents a 20-byte Ethereum Compatible address.\n\nThis structure is used to store Ethereum Compatible addresses, which are derived from the public key. It implements traits like Clone, Copy, Debug, Serialize, Deserialize, etc., for ease of use across various contexts.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint8",
+        "minimum": 0.0
+      },
+      "maxItems": 20,
+      "minItems": 20
+    },
+    "Namespace": {
+      "type": "string"
+    }
+  }
+}

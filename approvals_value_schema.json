@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApprovalsValue",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "Insert"
+      ],
+      "properties": {
+        "Insert": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/Address"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/U256"
+              }
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Extend"
+      ],
+      "properties": {
+        "Extend": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "$ref": "#/definitions/Address"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/U256"
+                }
+              }
+            ],
+            "maxItems": 2,
+            "minItems": 2
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Remove"
+      ],
+      "properties": {
+        "Remove": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/Address"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/U256"
+              }
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Revoke"
+      ],
+      "properties": {
+        "Revoke": {
+          "$ref": "#/definitions/Address"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "Address": {
+      "description": "Represents a 20-byte Ethereum Compatible address.\n\nThis structure is used to store Ethereum Compatible addresses, which are derived from the public key. It implements traits like Clone, Copy, Debug, Serialize, Deserialize, etc., for ease of use across various contexts.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint8",
+        "minimum": 0.0
+      },
+      "maxItems": 20,
+      "minItems": 20
+    },
+    "U256": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0.0
+      },
+      "maxItems": 4,
+      "minItems": 4
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BalanceValue",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "Credit"
+      ],
+      "properties": {
+        "Credit": {
+          "$ref": "#/definitions/U256"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Debit"
+      ],
+      "properties": {
+        "Debit": {
+          "$ref": "#/definitions/U256"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "U256": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "uint64",
+        "minimum": 0.0
+      },
+      "maxItems": 4,
+      "minItems": 4
+    }
+  }
+}
